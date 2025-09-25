@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function Signup(){
     const [name, setName] = useState("");
@@ -7,7 +7,7 @@ export default function Signup(){
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const res = await fetch("/api/users", {
             method: "POST",

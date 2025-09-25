@@ -46,10 +46,18 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ error: "Invalid Request!" }, { status: 400 });
-  } catch (err:any) {
-    console.error("API ERROR:", err.message); // ✅ log in terminal
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("API ERROR:", err.message);
+      return NextResponse.json(
+        { error: "Internal Server Error", details: err.message },
+        { status: 500 }
+      );
+    }
+
+    console.error("API ERROR:", err);
     return NextResponse.json(
-      { error: "Internal Server Error", details: err.message },
+      { error: "Internal Server Error"},
       { status: 500 }
     );
   }

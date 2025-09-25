@@ -1,12 +1,12 @@
 "use client";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function Login(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const res = await fetch("/api/users", {
             method: "POST",
